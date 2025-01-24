@@ -1,13 +1,9 @@
 import mongoose from "mongoose";
 import validator from 'validator';
+import bcrypt from "bcrypt"
+import { UserType } from "../types/types";
 
 
-type UserType = {
-    name: string,
-    email: string,
-    password: string,
-    passConfirm: string
-}
 
 const UserSchema = new mongoose.Schema({
     name: { type: String, required: true },
@@ -31,7 +27,21 @@ const UserSchema = new mongoose.Schema({
         },
         trim: true,
       },
-});
+},
+{
+    timestamps: true,
+    toJSON: { virtuals: true },
+    toObject: { virtuals: true },
+  }
+);
+
+
+UserSchema.pre('save', async function (next) {
+    if (!this.isModified('password')) return next();
+    this.password = await bcrypt.hash(this.password, 12);
+    this.passConfirm = undefined;
+    next();
+  });
 
 const User = mongoose.model <UserType> ("User", UserSchema);
 
