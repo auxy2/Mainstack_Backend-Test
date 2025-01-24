@@ -1,4 +1,12 @@
 import mongoose from "mongoose"
+import { Request, Response, NextFunction } from "express";
+
+
+export type RequestHandler = (
+    req: Request,
+    res: Response,
+    next: NextFunction
+  ) => Promise<void>;
 
 export type UserType = {
     name: string,
