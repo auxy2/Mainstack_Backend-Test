@@ -3,7 +3,7 @@ import { OrderType } from "../types/types";
 
 const OrderSchema = new Schema({
     user: { type: Schema.Types.ObjectId, ref: "User", required: true },
-    Products: [{
+    products: [{
         Product: { type: Schema.Types.ObjectId, ref: "Product", required: true },
         quatity: { type: Number, required: true }
     }],
