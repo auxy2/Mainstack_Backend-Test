@@ -4,18 +4,18 @@ import http from 'http';
 // import cors from 'cors';
 // import compression from 'compression';
 // import paginator from 'mongoose-paginate-v2';
-// import morgan from 'morgan';
+import morgan from 'morgan';
 // import bodyParser from 'body-parser';
 // import helmet from 'helmet';
 // import { corsOptions } from './base/cors.js';
 import cookieParser from 'cookie-parser';
-// import notFound from './middlewares/notfound.js';
+import notFound from './middlewares/notfound';
 
 dotenv.config();
 // paginator.paginate.options = { lean: true, leanWithId: false };
 
 const router = express.Router();
-// import routes from './routes/index.js';
+import routes from "./route/";
 
 const app = express();
 
@@ -29,10 +29,10 @@ app.use(express.urlencoded({ extended: true }));
 const server = http.createServer(app);
 
 // app.use(cors(corsOptions));
-// app.use(morgan('tiny'));
+app.use(morgan('tiny'));
 // app.use(helmet());
 
-// app.use('/v1', routes);
-// app.use(notFound);
+app.use('/api', routes);
+app.use(notFound);
 
 export default server;

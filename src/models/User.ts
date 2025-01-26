@@ -7,14 +7,18 @@ import { UserType } from "../types/types";
 
 const UserSchema = new mongoose.Schema({
     name: { type: String, required: true },
-    email: { type: String, required: true, unique: true },
+    email: { 
+      type: String, 
+      required: true, 
+      unique: true,
+      validate: [validator.isEmail, "Invalid email address"],
+     },
     password: {
         type: String,
         required: true,
         minlength: [8, 'Password must be greater than 8 characters'],
         select: false,
         trim: true,
-        validate: [validator.isEmail, "Invalid email address"],
       },
       passConfirm: {
         type: String,

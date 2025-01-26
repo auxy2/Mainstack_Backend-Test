@@ -13,12 +13,21 @@ const error = (res: Response, code: number, err: string | Error): Response => {
   }
 
   const networkError = message.split(' ')[0];
-  if (networkError === 'getaddrinfo')
+  if (networkError === 'getaddrinfo'){
     message = 'Server not connected to internet';
+  }
 
   const duplicateError = message.split(' ')[0];
-  if (duplicateError === 'E11000')
-    message = 'Record exist please review your fields';
+  if (duplicateError === 'E11000'){
+    message = 'Document exist';
+  }
+  
+  if(customCode === 500) {
+    return res.status(customCode).json({
+      success: 0,
+      message: "Something went wrong please try again",
+    })
+  }
 
   return res.status(customCode).json({
     success: 0,
