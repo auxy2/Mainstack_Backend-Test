@@ -2,9 +2,9 @@ import jwt, { JwtPayload } from "jsonwebtoken";
 import { error, success } from "../helpers/response";
 import asyncWrapper from "../middlewares/async";
 import User from "../models/User";
-import { RequestHandler } from "../types/types";
+import { RequestHandler, CustomRequest } from "../types/types";
 import { extractStatusCode } from "../utils";
-import { BadRequestError, NotFoundError } from "../utils/error/custom";
+import { BadRequestError, NotFoundError, UnauthenticatedError } from "../utils/error/custom";
 import { correctPass, payload } from "./helper";
 
 
@@ -50,22 +50,36 @@ export const login: RequestHandler = asyncWrapper(
 );
 
 
-export const getUser: RequestHandler = asyncWrapper(
-    async (req, res) => {
-      const token = req.cookies.token;
-      try {
-        if (!token) {
-            throw new BadRequestError("Please loging to contineu");
+export const protect: RequestHandler = asyncWrapper(
+    async (req, res, next) => {
+        const customReq = req as CustomRequest;
+        const token = req.cookies.token;
+        let jwtToken;
+        try {
+          if (
+            req.headers.authorization &&
+            req.headers.authorization.startsWith('MainStack')
+          ){
+            jwtToken = req.headers.authorization.split(' ')[1];
           }
-        const decoded = jwt.verify(token, process.env.JWT_SECRET as string);
+        
+          const authToken = token || jwtToken
+
+          if (!authToken) throw new UnauthenticatedError('You are not login yet');
+
+        const decoded = jwt.verify(authToken, process.env.JWT_SECRET as string);
         const Id = (decoded as JwtPayload).Id;
         const user = await User.findById(Id);
   
         if (!user) {
-          throw new BadRequestError("Please login again");
+          throw new UnauthenticatedError("Please login again");
         }
 
-        success(res, 200, user, undefined);
+        customReq.locals = { 
+            ...customReq.locals,
+            user 
+        }
+        return next()
       } catch (e) {
         const statusCode = extractStatusCode(e);
         console.log(statusCode);

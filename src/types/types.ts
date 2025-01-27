@@ -27,6 +27,14 @@ export interface User {
 }
 
 
+export interface CustomRequest extends Request {
+  locals?: {
+    user?: any
+  };
+}
+
+
+
 export type ProductType = {
     name: string,
     price: number,
