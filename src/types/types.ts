@@ -9,11 +9,23 @@ export type RequestHandler = (
   ) => Promise<void>;
 
 export type UserType = {
+    _id: string
     name: string,
     email: string,
     password: string,
-    passConfirm: string
+    passConfirm: string,
+    verified: boolean
 }
+
+export interface User {
+    _id: string
+    name: string,
+    email: string,
+    password: string,
+    passConfirm: string,
+    verified: boolean
+}
+
 
 export type ProductType = {
     name: string,

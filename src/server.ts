@@ -1,5 +1,5 @@
 import dotenv from 'dotenv';
-import express from 'express';
+import express, { Request, Response, NextFunction } from 'express';
 import http from 'http';
 // import cors from 'cors';
 // import compression from 'compression';
@@ -19,10 +19,12 @@ import routes from "./route/";
 
 const app = express();
 
+
+app.use(express.json());
+
 // app.use(compression());
 app.use(cookieParser());
 app.set('trust proxy', 1);
-app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 // app.use(bodyParser.raw({ type: 'application/json' }));
 

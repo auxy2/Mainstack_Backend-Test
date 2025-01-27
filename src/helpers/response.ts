@@ -21,8 +21,8 @@ const error = (res: Response, code: number, err: string | Error): Response => {
   if (duplicateError === 'E11000'){
     message = 'Document exist';
   }
-  
   if(customCode === 500) {
+    console.log("Error Message", message)
     return res.status(customCode).json({
       success: 0,
       message: "Something went wrong please try again",
