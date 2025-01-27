@@ -25,13 +25,23 @@ const error = (res: Response, code: number, err: string | Error): Response => {
     const validations = ["User", "WishList", "Product" , "Orders", "Cart", "Address"]
     console.log("Error Message", message)
     const lastMessage = message.substring(message.lastIndexOf(":") + 1).trim();
-    const validationError = message.split(" ")[0]
+    const validationError = message.split(" ")[0];
+
+
     if(validations.includes(validationError)){
       return res.status(customCode).json({
         success: 0,
         message: lastMessage,
       })
     }
+
+    if(message === "invalid signature"){
+      return res.status(customCode).json({
+        success: 0,
+        message
+      })
+    }
+    
     return res.status(customCode).json({
       success: 0,
       message: "Something went wrong please try again",

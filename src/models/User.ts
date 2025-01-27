@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+import mongoose, { Query } from "mongoose";
 import validator from 'validator';
 import bcrypt from "bcrypt"
 import { UserType } from "../types/types";
@@ -31,7 +31,11 @@ const UserSchema = new mongoose.Schema({
         },
         trim: true,
       },
-      verified: Boolean
+      verified: Boolean,
+      active: {
+        type: Boolean,
+        default: true
+      }
 },
 {
     timestamps: true,
@@ -48,6 +52,17 @@ UserSchema.pre('save', async function (next) {
     next();
   });
 
+  UserSchema.pre<Query<any, any>>(/^find/, function (next) {
+    this.find({ active: { $ne: false } }); // Add a query filter
+    next();
+  });
+
+  UserSchema.methods.isSameAsOld = async function (newPass: string, currentPass: string){
+    return bcrypt.compare(newPass, currentPass)
+  }
+
+
+  
 const User = mongoose.model <UserType> ("User", UserSchema);
 
 export default User;

@@ -14,7 +14,9 @@ export type UserType = {
     email: string,
     password: string,
     passConfirm: string,
-    verified: boolean
+    verified: boolean,
+    active: boolean,
+    isSameAsOld: (newPassword: string, oldPassword: string) => boolean;
 }
 
 export interface User {
@@ -23,7 +25,7 @@ export interface User {
     email: string,
     password: string,
     passConfirm: string,
-    verified: boolean
+    verified: boolean,
 }
 
 
@@ -32,7 +34,6 @@ export interface CustomRequest extends Request {
     user?: any
   };
 }
-
 
 
 export type ProductType = {

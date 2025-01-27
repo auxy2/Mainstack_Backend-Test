@@ -64,7 +64,6 @@ export const protect: RequestHandler = asyncWrapper(
           }
         
           const authToken = token || jwtToken
-
           if (!authToken) throw new UnauthenticatedError('You are not login yet');
 
         const decoded = jwt.verify(authToken, process.env.JWT_SECRET as string);
