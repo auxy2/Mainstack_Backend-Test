@@ -31,7 +31,6 @@ export const getProduct: RequestHandler = asyncWrapper(
     async(req, res) => {
         const query = req.params.query;
         try{
-console.log(query)
             const products = await Product.find({
                 $or: [
                     { name: {$regex: new RegExp(query, "i")} },
@@ -39,6 +38,18 @@ console.log(query)
                 ]
             });
             success(res, 200, undefined, products);
+        }catch(e){
+            const statusCode = extractStatusCode(e);
+             error(res, statusCode, e instanceof Error ? e : new Error(String(e)));
+        }
+    }
+)
+
+export const products = asyncWrapper(
+    async(req, res) =>{
+        try{
+            const product = await Product.find();
+            success(res, 200, undefined, product);
         }catch(e){
             const statusCode = extractStatusCode(e);
              error(res, statusCode, e instanceof Error ? e : new Error(String(e)));
