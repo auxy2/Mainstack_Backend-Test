@@ -3,7 +3,7 @@ import asyncWrapper from "../middlewares/async";
 import WishList from "../models/WishList";
 import { CustomRequest, RequestHandler } from "../types/types";
 import { extractStatusCode } from "../utils";
-import { BadRequestError } from "../utils/error/custom";
+import { BadRequestError, NotFoundError } from "../utils/error/custom";
 
 
 export const addWishlist: RequestHandler  = asyncWrapper(
@@ -41,8 +41,36 @@ export const removeWishList: RequestHandler = asyncWrapper(
             const {
                 locals: { user },
                 body: { productId }
-            } = customReq
+            } = customReq;
 
+            const wishList = await WishList.findOne({ user: user.id });
+
+            if(!wishList){
+                throw new NotFoundError("No wishslist found")
+            }
+
+             wishList.products = wishList.products.filter(item => item.product.toString() !== productId );
+             await wishList.save();
+             success(res, 200, undefined, "Product was successfully removed from wishList")
+        }catch(e){
+            const statusCode = extractStatusCode(e);
+            error(res, statusCode, e instanceof Error ? e : new Error(String(e)))
+        }
+    }
+);
+
+export const getWishlist = asyncWrapper(
+    async(req, res) => {
+        const customReq = req as CustomRequest
+        try{
+            const { 
+                locals: { user }
+            } = customReq;
+            const wishList = await WishList.findOne({ user: user.id}).populate("products.product");
+            if(!wishList){
+                throw new BadRequestError("Wishlist is empty")
+            }
+            success(res, 200, undefined, wishList);
         }catch(e){
             const statusCode = extractStatusCode(e);
             error(res, statusCode, e instanceof Error ? e : new Error(String(e)))
