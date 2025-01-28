@@ -70,4 +70,24 @@ export const cancelOrder: RequestHandler  = asyncWrapper(
              error(res, statusCode, e instanceof Error ? e : new Error(String(e)));
         }
     }
+);
+
+export const getOrder: RequestHandler  = asyncWrapper(
+    async(req, res) => {
+        const customReq = req as CustomRequest;
+        try{
+            const { 
+                locals: { user },
+            } = customReq;
+
+            const order = await Order.find({ user: user.id }).populate("address");
+            if(!order)
+                throw new BadRequestError("Order not found");
+
+            success(res, 200, user, order);
+        }catch(e){
+            const statusCode = extractStatusCode(e);
+             error(res, statusCode, e instanceof Error ? e : new Error(String(e)));
+        }
+    }
 )
