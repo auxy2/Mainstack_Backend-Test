@@ -73,3 +73,23 @@ export const removeCart: RequestHandler =  asyncWrapper(
         }
     }
 )
+
+export const getCart: RequestHandler  = asyncWrapper(
+    async(req, res) => {
+        const customReq = req as CustomRequest;
+        try{
+            const { 
+                locals: { user },
+            } = customReq;
+
+            const order = await Cart.find({ user: user.id }).populate("products.product");
+            if(!order)
+                throw new BadRequestError("Order not found");
+
+            success(res, 200, user, order);
+        }catch(e){
+            const statusCode = extractStatusCode(e);
+             error(res, statusCode, e instanceof Error ? e : new Error(String(e)));
+        }
+    }
+)
