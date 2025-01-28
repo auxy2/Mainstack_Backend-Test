@@ -70,3 +70,19 @@ export const productsCat: RequestHandler = asyncWrapper(
         }
     }
 )
+
+
+export const productById: RequestHandler = asyncWrapper(
+    async(req, res) =>{
+        try{
+            const {
+                params: { id } 
+            } = req;
+            const product = await Product.findById(id);
+            success(res, 200, undefined, product);
+        }catch(e){
+            const statusCode = extractStatusCode(e);
+             error(res, statusCode, e instanceof Error ? e : new Error(String(e)));
+        }
+    }
+)
