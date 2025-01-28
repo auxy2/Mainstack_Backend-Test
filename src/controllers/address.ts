@@ -5,6 +5,7 @@ import Address from "../models/Address";
 import { CustomRequest, RequestHandler } from "../types/types";
 import { extractStatusCode } from "../utils";
 import { BadRequestError } from "../utils/error/custom";
+import User from "../models/User";
 
 
 
@@ -41,7 +42,6 @@ export const updateAddress:  RequestHandler = asyncWrapper(
                 body
             } = customReq;
 
-            console.log(user.address.toString(), id);
             if(user.address.toString() !== id )
                 throw new BadRequestError("the provided address id does not belongs to this user")
 
@@ -52,6 +52,49 @@ export const updateAddress:  RequestHandler = asyncWrapper(
             );
 
             success(res, 201, undefined, updateAddress);
+        }catch(e){
+            const statusCode = extractStatusCode(e);
+             error(res, statusCode, e instanceof Error ? e : new Error(String(e)));
+        }
+    }
+);
+
+export const deleteAddress: RequestHandler = asyncWrapper(
+    async(req, res) => {
+        const customReq = req as CustomRequest
+        try{
+            const { 
+                locals: { user },
+                params: { id },
+            } = customReq;
+
+            console.log(user.address.toString(), id);
+            if(user.address.toString() !== id )
+                throw new BadRequestError("the provided address id does not belongs to this user")
+
+            await Address.findByIdAndUpdate(id);
+
+            user.address = undefined;
+            await user.save({ validateBeforeSave: false });
+
+            success(res, 204, undefined, "Address has been deleted");
+        }catch(e){
+            const statusCode = extractStatusCode(e);
+             error(res, statusCode, e instanceof Error ? e : new Error(String(e)));
+        }
+    }
+)
+
+
+export const getUserAddress: RequestHandler = asyncWrapper(
+    async(req, res) => {
+        const customReq = req as CustomRequest;
+        try{
+            const {
+                locals: { user }
+            } = customReq;
+            const userWithAddress = await User.findOne(user).populate("address");
+            success(res, 200, userWithAddress, undefined );
         }catch(e){
             const statusCode = extractStatusCode(e);
              error(res, statusCode, e instanceof Error ? e : new Error(String(e)));

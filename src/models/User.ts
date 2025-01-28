@@ -31,9 +31,9 @@ const UserSchema = new mongoose.Schema({
         },
         trim: true,
       },
-      address: { type: Schema.Types.ObjectId, required: true },
-      carts: { type: Schema.Types.ObjectId, required: true },
-      orders: { type: Schema.Types.ObjectId, required: true },
+      address: { type: Schema.Types.ObjectId, ref: "Address"},
+      carts: { type: Schema.Types.ObjectId, ref: "Cart"},
+      orders: { type: Schema.Types.ObjectId, ref: "Orders"},
       verified: Boolean,
       active: {
         type: Boolean,
