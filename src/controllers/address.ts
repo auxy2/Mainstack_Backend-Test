@@ -72,8 +72,8 @@ export const deleteAddress: RequestHandler = asyncWrapper(
             if(user.address.toString() !== id )
                 throw new BadRequestError("the provided address id does not belongs to this user")
 
-            await Address.findByIdAndUpdate(id);
-
+            await Address.findByIdAndDelete(id);
+            console.log(await Address.findByIdAndDelete(id))
             user.address = undefined;
             await user.save({ validateBeforeSave: false });
 
@@ -93,7 +93,9 @@ export const getUserAddress: RequestHandler = asyncWrapper(
             const {
                 locals: { user }
             } = customReq;
-            const userWithAddress = await User.findOne(user).populate("address");
+            if(!user.address)
+                throw new BadRequestError("Please got to  /create to add an address")
+            const userWithAddress = await User.findOne({ _id: user._id }).populate("address");
             success(res, 200, userWithAddress, undefined );
         }catch(e){
             const statusCode = extractStatusCode(e);
