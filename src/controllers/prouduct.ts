@@ -25,3 +25,23 @@ export const addproduct: RequestHandler = asyncWrapper(
         }
     }
 )
+
+
+export const getProduct: RequestHandler = asyncWrapper(
+    async(req, res) => {
+        const query = req.params.query;
+        try{
+console.log(query)
+            const products = await Product.find({
+                $or: [
+                    { name: {$regex: new RegExp(query, "i")} },
+                    { category: {$regex: new RegExp(query, "i")} }
+                ]
+            });
+            success(res, 200, undefined, products);
+        }catch(e){
+            const statusCode = extractStatusCode(e);
+             error(res, statusCode, e instanceof Error ? e : new Error(String(e)));
+        }
+    }
+)
