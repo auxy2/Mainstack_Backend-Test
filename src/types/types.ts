@@ -43,7 +43,7 @@ export type ProductType = {
     images: string[],
     category: string[],
     color: string[],
-    size: string[]
+    size: string[],
 }
 
 export type OrderType = {

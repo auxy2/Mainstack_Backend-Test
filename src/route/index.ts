@@ -3,6 +3,7 @@ import authRout from "./auth"
 import userRout from "./user"
 import productRout from "./product"
 import addressRout from "./address"
+import orderRouter from "./orders"
 
 const router = Router()
 
@@ -18,4 +19,5 @@ router.use("/auth", authRout );
 router.use("/user", userRout)
 router.use("/product", productRout)
 router.use("/address", addressRout);
+router.use("/order", orderRouter)
 export default router
