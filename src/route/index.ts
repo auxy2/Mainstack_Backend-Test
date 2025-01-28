@@ -2,6 +2,7 @@ import { Router } from "express"
 import authRout from "./auth"
 import userRout from "./user"
 import productRout from "./product"
+import addressRout from "./address"
 
 const router = Router()
 
@@ -16,5 +17,5 @@ router.get('/', (req, res) => {
 router.use("/auth", authRout );
 router.use("/user", userRout)
 router.use("/product", productRout)
-
+router.use("/address", addressRout);
 export default router
