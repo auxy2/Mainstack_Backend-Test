@@ -44,4 +44,30 @@ export const createOrder: RequestHandler = asyncWrapper(
              error(res, statusCode, e instanceof Error ? e : new Error(String(e)));
         }
     }
+);
+
+
+export const cancelOrder: RequestHandler  = asyncWrapper(
+    async(req, res) => {
+        const customReq = req as CustomRequest;
+        try{
+            const { 
+                locals: { user },
+                params: { id }
+            } = customReq;
+
+            const order = await Order.findById(id);
+            if(!order)
+                throw new BadRequestError("Order not found");
+
+            if(user.id !== order.user.toString())
+                throw new BadRequestError("this order does not belong to you");
+
+            await Order.findByIdAndDelete(id);
+            success(res, 204, undefined, undefined);
+        }catch(e){
+            const statusCode = extractStatusCode(e);
+             error(res, statusCode, e instanceof Error ? e : new Error(String(e)));
+        }
+    }
 )
