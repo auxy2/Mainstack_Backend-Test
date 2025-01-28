@@ -35,9 +35,9 @@ export interface CustomRequest extends Request {
   };
 }
 
-
 export type ProductType = {
     name: string,
+    user: mongoose.Types.ObjectId,
     price: number,
     describtion: string,
     images: string[],
