@@ -68,7 +68,7 @@ export type CartType = {
 export type WishListType = {
     user: mongoose.Types.ObjectId,
     products: {
-        Product: mongoose.Types.ObjectId,
+        product: mongoose.Types.ObjectId,
     }[]
 }
 
