@@ -1,4 +1,4 @@
-import mongoose, { Query } from "mongoose";
+import mongoose, { Query, Schema } from "mongoose";
 import validator from 'validator';
 import bcrypt from "bcrypt"
 import { UserType } from "../types/types";
@@ -31,6 +31,9 @@ const UserSchema = new mongoose.Schema({
         },
         trim: true,
       },
+      address: { type: Schema.Types.ObjectId, required: true },
+      carts: { type: Schema.Types.ObjectId, required: true },
+      orders: { type: Schema.Types.ObjectId, required: true },
       verified: Boolean,
       active: {
         type: Boolean,

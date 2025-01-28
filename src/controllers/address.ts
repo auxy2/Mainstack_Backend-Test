@@ -1,3 +1,4 @@
+import { validateHeaderName } from "http";
 import { error, success } from "../helpers/response";
 import asyncWrapper from "../middlewares/async";
 import Address from "../models/Address";
@@ -17,6 +18,10 @@ export const addAddress: RequestHandler = asyncWrapper(
             body.user = user.id;
             const newAddress = new Address(req.body);
             const savedAddress = await newAddress.save()
+
+            user.address = savedAddress.id;
+            await user.save({ validateBeforeSave: false });
+
             success(res, 201, undefined, savedAddress);
         }catch(e){
             const statusCode = extractStatusCode(e);
