@@ -45,10 +45,24 @@ export const getProduct: RequestHandler = asyncWrapper(
     }
 )
 
-export const products = asyncWrapper(
+export const products: RequestHandler = asyncWrapper(
     async(req, res) =>{
         try{
             const product = await Product.find();
+            success(res, 200, undefined, product);
+        }catch(e){
+            const statusCode = extractStatusCode(e);
+             error(res, statusCode, e instanceof Error ? e : new Error(String(e)));
+        }
+    }
+)
+
+
+export const productsCat: RequestHandler = asyncWrapper(
+    async(req, res) => {
+        const category = req.params.category
+        try{
+            const product = await Product.find({ category });
             success(res, 200, undefined, product);
         }catch(e){
             const statusCode = extractStatusCode(e);
