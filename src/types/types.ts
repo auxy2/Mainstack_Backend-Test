@@ -50,7 +50,7 @@ export type OrderType = {
     user: mongoose.Types.ObjectId,
     products: {
         Product: mongoose.Types.ObjectId,
-        quatity: number
+        quantity: number
     }[],
     total_price: number,
     status: string,
@@ -60,7 +60,7 @@ export type OrderType = {
 export type CartType = {
     user: mongoose.Types.ObjectId,
     products: {
-        Product: mongoose.Types.ObjectId,
+        product: mongoose.Types.ObjectId,
         quatity: number
     }[]
 }

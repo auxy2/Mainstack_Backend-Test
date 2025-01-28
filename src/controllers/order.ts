@@ -18,7 +18,7 @@ export const createOrder: RequestHandler = asyncWrapper(
             } = customReq;
 
             let totalPrice = 0;
-            for (const item of body.Products) {
+            for (const item of body.products) {
                 const { product, quantity } = item;
 
                 if (!product || !quantity) {
