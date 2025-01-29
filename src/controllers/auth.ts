@@ -17,7 +17,7 @@ export const signUp: RequestHandler = asyncWrapper(
                 throw new BadRequestError("User with this email already exists");
             }
             await User.create(req.body);
-            success(res, 201, undefined, "Check your email Inbox or Spam folder for verification")
+            success(res, 201, undefined, "Sign up successfull please login to continue")
             }catch(e){
                 const statusCode = extractStatusCode(e);
                  error(res, statusCode, e instanceof Error ? e : new Error(String(e)))
