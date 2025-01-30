@@ -1,31 +1,3 @@
-# version: "3"
-
-# services: 
-#     mongo_db: 
-#       container_name: database
-#       image: mongo:latest
-#       restart: always
-#       volumes: 
-#          - mongo_db/data/db
-
-# app: 
-#     build: .
-#     ports: 
-#       - 4567:3000
-#     enviroments: 
-#         PORT: 4567
-#         DATABASE_URL: mongodb+srv://personalemail8000:SirUPUcchBtIu3wM@skyshow.yqgndns.mongodb.net/
-#         DATABASE_NAME: MainStack-Test
-#         JWT_SECRET: MainStack-Backend-Test
-#         JWTEXPIN: 3d
-#         JWT_ISS: MainStack
-#     depends_on:
-#         - mongo_db
-
-# volumes: 
-#     mongo_db: {}
-   
-
 version: "3"
 
 services: 
@@ -34,7 +6,7 @@ services:
     image: mongo:latest
     restart: always
     volumes: 
-       - mongo_db/data/db
+       - mongo_db:/data/db
 
   app:  
     build: .
