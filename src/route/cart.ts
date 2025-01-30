@@ -1,7 +1,7 @@
 import { Router } from "express";
 import { deflate } from "zlib";
-import { addCart, getCart, removeCart } from "../controllers/cart";
-import { protect } from "../controllers/auth";
+import { addCart, getCart, removeCart } from "../controllers/cart.js";
+import { protect } from "../controllers/auth.js";
 
 
 

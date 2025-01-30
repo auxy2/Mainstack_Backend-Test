@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { RequestHandler } from "../types/types";
+import { RequestHandler } from "../types/types.js";
 /**
  * UNHANDLE ROUTE RESPONSE
  * @param {*} req

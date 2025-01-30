@@ -1,6 +1,6 @@
 import { Router } from "express";
-import { cancelOrder, createOrder, getOrder } from "../controllers/order";
-import { protect } from "../controllers/auth";
+import { cancelOrder, createOrder, getOrder } from "../controllers/order.js";
+import { protect } from "../controllers/auth.js";
 
 
 const router = Router();

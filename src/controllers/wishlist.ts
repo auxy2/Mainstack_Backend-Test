@@ -1,9 +1,9 @@
-import { error, success } from "../helpers/response";
-import asyncWrapper from "../middlewares/async";
-import WishList from "../models/WishList";
-import { CustomRequest, RequestHandler } from "../types/types";
-import { extractStatusCode } from "../utils";
-import { BadRequestError, NotFoundError } from "../utils/error/custom";
+import { error, success } from "../helpers/response.js";
+import asyncWrapper from "../middlewares/async.js";
+import WishList from "../models/WishList.js";
+import { CustomRequest, RequestHandler } from "../types/types.js";
+import { extractStatusCode } from "../utils/index.js";
+import { BadRequestError, NotFoundError } from "../utils/error/custom.js";
 
 
 export const addWishlist: RequestHandler  = asyncWrapper(

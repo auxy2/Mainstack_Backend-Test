@@ -1,9 +1,9 @@
-import asyncWrapper from "../middlewares/async";
-import { extractStatusCode } from "../utils";
-import { BadRequestError, NotFoundError } from "../utils/error/custom";
-import User from "../models/User";
-import { CustomRequest, RequestHandler } from "../types/types";
-import { success, error } from "../helpers/response";
+import asyncWrapper from "../middlewares/async.js";
+import { extractStatusCode } from "../utils/index.js";
+import { BadRequestError, NotFoundError } from "../utils/error/custom.js";
+import User from "../models/User.js";
+import { CustomRequest, RequestHandler } from "../types/types.js";
+import { success, error } from "../helpers/response.js";
 
 
 

@@ -9,13 +9,13 @@ import morgan from 'morgan';
 // import helmet from 'helmet';
 // import { corsOptions } from './base/cors.js';
 import cookieParser from 'cookie-parser';
-import notFound from './middlewares/notfound';
+import notFound from './middlewares/notfound.js';
 
 dotenv.config();
 // paginator.paginate.options = { lean: true, leanWithId: false };
 
 const router = express.Router();
-import routes from "./route/";
+import routes from "./route/index.js";
 
 const app = express();
 

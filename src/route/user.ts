@@ -1,6 +1,6 @@
 import { Router } from "express";
-import { deleteMe, updateMe } from "../controllers/user";
-import { protect } from "../controllers/auth";
+import { deleteMe, updateMe } from "../controllers/user.js";
+import { protect } from "../controllers/auth.js";
 
 
 

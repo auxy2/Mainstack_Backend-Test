@@ -1,5 +1,5 @@
 import mongoose, { Schema } from "mongoose";
-import { AddressType } from "../types/types";
+import { AddressType } from "../types/types.js";
 
 
 const AddressSchema = new Schema({

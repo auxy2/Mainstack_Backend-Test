@@ -1,19 +1,20 @@
 {
     "compilerOptions": {
-        "target": "ES6",
+        "target": "ESNext",
         // "types": ["mocha", "chai", "node"],
         "types": ["mocha", "chai", "chai-http", "node"],
         "typeRoots": ["./node_modules/@types", "./src/types"],
-        "module": "ESNext",
+        "module": "NodeNext",
         "strict": true,
         "allowSyntheticDefaultImports": true,
-        "moduleResolution": "node",
+        "moduleResolution": "NodeNext",
         "strictNullChecks": false,
         "esModuleInterop": true,
         "skipLibCheck": true,
         "forceConsistentCasingInFileNames": true,
         "outDir": "./dist",
-        "rootDir": "./"
+        "rootDir": "./",
+        "allowJs": true,
     },
     // "include": [
     //     "src/**/*.ts", "index.ts", "src/types/**/*.d.ts" ],

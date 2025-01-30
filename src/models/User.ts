@@ -1,7 +1,7 @@
 import mongoose, { Query, Schema } from "mongoose";
 import validator from 'validator';
 import bcrypt from "bcrypt"
-import { UserType } from "../types/types";
+import { UserType } from "../types/types.js";
 
 
 

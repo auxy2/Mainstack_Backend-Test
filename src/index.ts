@@ -1,5 +1,5 @@
-import server from './server';
-import { connectDB } from './services/database';
+import server from './server.js';
+import { connectDB } from './services/database.js';
 
 const { PORT } = process.env;
 

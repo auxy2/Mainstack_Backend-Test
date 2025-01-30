@@ -1,6 +1,6 @@
 import { Router } from "express";
-import { addWishlist, getWishlist, removeWishList } from "../controllers/wishlist";
-import { protect } from "../controllers/auth";
+import { addWishlist, getWishlist, removeWishList } from "../controllers/wishlist.js";
+import { protect } from "../controllers/auth.js";
 
 
 

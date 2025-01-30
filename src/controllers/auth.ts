@@ -1,11 +1,11 @@
 import jwt, { JwtPayload } from "jsonwebtoken";
-import { error, success } from "../helpers/response";
-import asyncWrapper from "../middlewares/async";
-import User from "../models/User";
-import { RequestHandler, CustomRequest } from "../types/types";
-import { extractStatusCode } from "../utils";
-import { BadRequestError, NotFoundError, UnauthenticatedError } from "../utils/error/custom";
-import { correctPass, payload } from "./helper";
+import { error, success } from "../helpers/response.js";
+import asyncWrapper from "../middlewares/async.js";
+import User from "../models/User.js";
+import { RequestHandler, CustomRequest } from "../types/types.js";
+import { extractStatusCode } from "../utils/index.js";
+import { BadRequestError, NotFoundError, UnauthenticatedError } from "../utils/error/custom.js";
+import { correctPass, payload } from "./helper.js";
 
 
 export const signUp: RequestHandler = asyncWrapper(

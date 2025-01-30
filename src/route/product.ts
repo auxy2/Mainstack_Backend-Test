@@ -1,6 +1,6 @@
 import { Router } from "express";
-import { addproduct, getProduct, productById, products, productsCat } from "../controllers/prouduct";
-import { protect } from "../controllers/auth";
+import { addproduct, getProduct, productById, products, productsCat } from "../controllers/prouduct.js";
+import { protect } from "../controllers/auth.js";
 
 
 const router = Router();

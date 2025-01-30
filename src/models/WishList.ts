@@ -1,5 +1,5 @@
 import mongoose, { Schema } from "mongoose";
-import { WishListType } from "../types/types";
+import { WishListType } from "../types/types.js";
 
 const WishListSchema = new Schema({
     user: { type: Schema.Types.ObjectId, required: true },

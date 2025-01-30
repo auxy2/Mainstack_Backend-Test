@@ -1,6 +1,6 @@
 import bcrypt from "bcrypt"
 import jwt, { Secret, SignOptions } from "jsonwebtoken";
-import { User } from "../types/types";
+import { User } from "../types/types.js";
 
 
 

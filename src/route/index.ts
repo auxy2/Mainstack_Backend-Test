@@ -1,11 +1,11 @@
 import { Router } from "express"
-import authRout from "./auth"
-import userRout from "./user"
-import productRout from "./product"
-import addressRout from "./address"
-import orderRouter from "./orders"
-import cartRouter from "./cart"
-import wishliastRouter from "./wishlist"
+import authRout from "./auth.js"
+import userRout from "./user.js"
+import productRout from "./product.js"
+import addressRout from "./address.js"
+import orderRouter from "./orders.js"
+import cartRouter from "./cart.js"
+import wishliastRouter from "./wishlist.js"
 
 const router = Router()
 
