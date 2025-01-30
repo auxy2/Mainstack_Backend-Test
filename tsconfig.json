@@ -1,18 +1,23 @@
 {
     "compilerOptions": {
-        "target": "ES2018",
+        "target": "ESNext", //"ES2018", // "ES6"
+        // "types": ["mocha", "chai", "node"],
+        "types": ["mocha", "chai", "chai-http", "node"],
+        "typeRoots": ["./node_modules/@types", "./src/types"],
         "module": "CommonJS",
         "strict": true,
+        "allowSyntheticDefaultImports": true,
+        "moduleResolution": "node",
         "strictNullChecks": false,
         "esModuleInterop": true,
         "skipLibCheck": true,
         "forceConsistentCasingInFileNames": true,
-        "outDir": "build",
+        "outDir": "./dist",
         "rootDir": "./"
     },
-    "include": [
-        "src/**/*.ts",
- "index.ts"    ],
+    // "include": [
+    //     "src/**/*.ts", "index.ts", "src/types/**/*.d.ts" ],
+    "include": ["src/**/*", "src/types/**/*.d.ts", "src/tests/test.spec.ts"],
     "exclude": [
         "node_modules"
     ]
