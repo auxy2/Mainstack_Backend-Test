@@ -7,7 +7,7 @@ const serverStart = async () => {
   try {
     await connectDB();
 
-    server.listen(PORT, () => {
+    server.listen(parseInt(PORT) || 4567, '0.0.0.0', () => {
       console.log(`⚡️[server]: Server is running on port ${PORT}`);
     });
   } catch (e) {

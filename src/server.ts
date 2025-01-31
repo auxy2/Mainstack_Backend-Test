@@ -19,6 +19,14 @@ import routes from "./route/index.js";
 
 const app = express();
 
+router.get('/', (req, res) => {
+    res.status(200).send({
+      success: 1,
+      message:
+        'Hello from MainStack Backend Developer Assessment. Check the API specification for further guidance and next steps. get the postman collection for full documentation',
+    });
+  });
+
 
 app.use(express.json());
 

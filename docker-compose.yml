@@ -1,26 +1,64 @@
+# version: "3"
+
+# services: 
+#   mongo_db: 
+#     container_name: database
+#     image: mongo:latest
+#     restart: always
+#     volumes: 
+#        - mongo_db:/data/db
+
+#   app:  
+#     build: .
+#     ports: 
+#       - "4567"
+#     environment:  
+#       - PORT=4567
+#       - DATABASE_URL=mongodb+srv://personalemail8000:SirUPUcchBtIu3wM@skyshow.yqgndns.mongodb.net/
+#       - DATABASE_NAME=MainStack-Test
+#       - JWT_SECRET=MainStack-Backend-Test
+#       - JWTEXPIN=3d
+#       - JWT_ISS=MainStack
+#     depends_on:
+#       - mongo_db
+
+# volumes: 
+#   mongo_db: {}
+
+
 version: "3"
 
-services: 
-  mongo_db: 
+services:
+  mongo_db:
     container_name: database
     image: mongo:latest
     restart: always
-    volumes: 
-       - mongo_db:/data/db
+    ports:
+      - "27017:27017"  # Expose the MongoDB port
+    volumes:
+      - mongo_db:/data/db
 
-  app:  
+  app:
     build: .
-    ports: 
-      - "4567:3000"
-    environment:  
+    container_name: app
+    ports:
+      - "4567:4567"  # Ensure the app's port is mapped correctly
+    environment:
       - PORT=4567
-      - DATABASE_URL=mongodb+srv://personalemail8000:SirUPUcchBtIu3wM@skyshow.yqgndns.mongodb.net/
+      - DATABASE_URL=mongodb+srv://personalemail8000:SirUPUcchBtIu3wM@skyshow.yqgndns.mongodb.net/  # Use local MongoDB URI in Docker
       - DATABASE_NAME=MainStack-Test
       - JWT_SECRET=MainStack-Backend-Test
       - JWTEXPIN=3d
       - JWT_ISS=MainStack
     depends_on:
       - mongo_db
+    networks:
+      - app-network
 
-volumes: 
-  mongo_db: {}
+volumes:
+  mongo_db:
+
+networks:
+  app-network:
+    driver: bridge
+
