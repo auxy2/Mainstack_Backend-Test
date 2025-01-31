@@ -1,7 +1,6 @@
 {
     "compilerOptions": {
         "target": "ESNext",
-        // "types": ["mocha", "chai", "node"],
         "types": ["mocha", "chai", "chai-http", "node"],
         "typeRoots": ["./node_modules/@types", "./src/types"],
         "module": "NodeNext",
@@ -13,13 +12,11 @@
         "skipLibCheck": true,
         "forceConsistentCasingInFileNames": true,
         "outDir": "./dist",
-        "rootDir": "./",
-        "allowJs": true,
+        "rootDir": "./src",  
+        "allowJs": true
     },
-    // "include": [
-    //     "src/**/*.ts", "index.ts", "src/types/**/*.d.ts" ],
-    "include": ["/**/.ts", "src/**/*.ts", "src/types/**/*.d.ts", "src/tests/test.spec.ts"],
+    "include": ["src/**/*.ts", "src/types/**/*.d.ts"], 
     "exclude": [
-        "node_modules"
+        "node_modules", "src/tests"  
     ]
 }

@@ -28,25 +28,18 @@
 # CMD ["npm", "start"]
 
 
-# Use Node.js base image
 FROM node:16-alpine
 
-# Set the working directory inside the container
 WORKDIR /usr/src/app
 
-# Copy package files and install dependencies
 COPY package.json package-lock.json ./
 RUN npm install
 
-# Copy the entire project (including TypeScript source files)
 COPY . ./
 
-# Run the TypeScript build to generate the dist/ folder
 RUN npm run build
 
-# Copy only necessary environment variables
 COPY .env ./
 
-# Start the application using the built JavaScript files
-CMD ["node", "dist/src/index.js"]
+CMD ["node", "dist/index.js"]
 
