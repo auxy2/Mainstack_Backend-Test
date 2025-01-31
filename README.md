@@ -86,7 +86,7 @@ Here are some of the key endpoints available in the API:
 
 ### Testing the API
 
-To test the API after setting it up, you can use tools like [Postman](https://www.postman.com/) or `curl` to make HTTP requests to the API endpoints.
+To test the API after setting it up, you can use tools like [Postman](https://www.postman.com/) or `curl` to make HTTP requests to the API endpoints. Find the postman collection [here](https://app.getpostman.com/join-teaminvite_code=82c6d4e6e970b3d968f6ac27b6ff45fe3b1aa8be87a3fc47bfb29e1c089edeb1&target_code=47b42dfff3cc59a25278e233677aee86)
 
 I encounter a bug while writing test please use post man for proper testings
 

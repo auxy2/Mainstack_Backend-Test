@@ -41,5 +41,5 @@ RUN npm run build
 
 COPY .env ./
 
-CMD ["node", "dist/index.js"]
+CMD ["node", "public/index.js"]
 
